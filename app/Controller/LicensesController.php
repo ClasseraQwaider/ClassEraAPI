@@ -37,20 +37,20 @@ public function Check(){
 
   if($count['License']['count'] == 0)
   {
-    $message = "user is not defined!";
+    
     $code = '400';
     
 
   }else
   {
-    $message = "user is licensed";
+    
     $code = "202";
   }
 
 
   $this->response->type('json');
       $json_body = json_encode(array(
-                'message'=>$message,
+                'message'=>AppController::getReturnedMessage($code),
                 'code'=>$code,
                 'status'=> $count['License']['count'] != 0 ? "true" : "false")
                
