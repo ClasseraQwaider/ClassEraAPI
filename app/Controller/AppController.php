@@ -22,6 +22,10 @@
 App::uses('Controller', 'Controller');
 
 
+
+
+
+
 /**
  * Application Controller
  *
@@ -36,12 +40,12 @@ class AppController extends Controller {
     private $returned_messages = array(
         '200' => 'your Operation Has Been Done Successfully', 
         '201' => '', 
-        '202' => 'user is licensed', 
+        '202' => 'user is licensed..', 
         '203' => 'Your Data has been saved Successfully', 
         '204' => 'Your Data has been Deleted Successfully', 
         '205' => '', 
         
-        '400' =>'This user do nat have Licenses!',
+        '400' =>'This user do nat have Licenses',
         '404' => 'Lesson Is Not Defined', 
         '405' => 'No comments Are Added On This Lesson!', 
         '406' => 'Unable To Save Your Data', 
