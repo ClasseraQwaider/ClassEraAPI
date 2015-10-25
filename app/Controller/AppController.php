@@ -45,6 +45,7 @@ class AppController extends Controller {
         '204' => 'Your Data has been Deleted Successfully', 
         '205' => '', 
         
+        
         '400' =>'This user do nat have Licenses',
         '404' => 'Lesson Is Not Defined', 
         '405' => 'No comments Are Added On This Lesson!', 

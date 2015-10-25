@@ -73,7 +73,7 @@ class DATABASE_CONFIG {
 		'persistent' => false,
 		'host' => '192.168.88.227',
 		'login' => 'classera_user',
-		'password' => 'class123',
+		'password' => '',
 		'database' => 'classera_db',
 		'prefix' => '',
 		'encoding' => 'utf8',
