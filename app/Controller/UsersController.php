@@ -34,7 +34,7 @@ class UsersController extends AppController {
 
                 if($exist){//already exist
                     $message='already exist';
-                    $status='false';
+                    $status='true';
                     $code='404';
                 }
                 else {
