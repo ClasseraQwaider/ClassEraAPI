@@ -1,74 +1,57 @@
 <?php
 
-// Controller/UsersController.php
-//App::import('Sanitize');
-
 class UsersController extends AppController {
+
     public $components = array('RequestHandler');
-    public $uses = array('Licenses','Users');
 
-
-    public function add()
-    {
-        $this->render(false);
-
-        $message=$status=$code=$user_id='';
-
+    
+    public function register() {
+        
+        $message = "";
+        $status = false;
+        $code = '';
+       
+        $data = array();
         if ($this->request->is('post')) {
+            $this->User->create();
+            
+            $data = array(
+                'username' => $this->data['username'],
+                'password' => $this->data['password'],
+                'role_id' => $this->data['role_id'],
+                'school_id' => $this->data['school_id'],
+                'level_id' => $this->data['level_id'],
+                
+                'first_name' => $this->data['first_name'],
+                'father_name' => $this->data['father_name'],
+                'grandfather_name' => $this->data['grandfather_name'],
+                'family_name' => $this->data['family_name'],
+                'address' => $this->data['address'],
+                'phone_number' => $this->data['phone_number'],
+                'mobile_number' => $this->data['mobile_number'],
+                'email' => $this->data['email'],
+                'nationality_id' => $this->data['nationality_id']);
 
-            $user = $this->Licenses->find('all');
-            //pr($this->data);//pr($this->request->data);
-
-           
-            $UsersData = $LicensesData = $this->data;
-            unset($UsersData['license_id']);
-             /*check if all data are sent*/
-            if(!isset($LicensesData['device_id']) || !isset($LicensesData['user_name']) || !isset($LicensesData['email'])){
-                $message='Data Missing';
-                $status='false';
-                $code='404';
-            }
-            else{
-                //check existance
-                $exist = $this->Licenses->find('count',array('conditions' => $LicensesData) );
-
-                if($exist){//already exist
-                    $message='already exist';
-                    $status='true';
-                    $code='404';
-                }
-                else {
-                    if ($this->Users->save($UsersData)){
-                        $usersRes = $this->Users->find('first',array('fields' => 'user_id','conditions' => $UsersData))['Users'];
-                        //pr($usersRes);echo "*****";
-
-                        $LicensesData['user_id']=$usersRes['user_id'];
-                        $this->Licenses->save($LicensesData);
-                        $message='Inserted Successfully';
-                        $status='true';
-                        $code='200';
-                        $user_id=$LicensesData['user_id'];
-                    }
-                }
-            //$log = $this->Licenses->getDataSource()->getLog(false, false);debug($log); //die;
+            if ($this->User->save($data)) {
+                $status = true;
+                $code = '203';
+            } else {
+                $code = '406';
             }
         }
 
-        //$this->set('user', $user);
-
         $this->response->type('json');
-        $json_body = json_encode(array( 
-                        "message"=>$message, 
-                        "status"=>$status, 
-                        "code"=>$code,
-                        'user_id'=>$user_id
-                       ));
+        $json_body = json_encode(
+                        array(  
+                                "message"=>AppController::getReturnedMessage($code),  
+                                "status"=>$status, 
+                                "code"=>$code
+            ));
         $this->response->body($json_body);
 
-    }//FUNCTION
+    }
 
-    
 
-       
+
 
 }
